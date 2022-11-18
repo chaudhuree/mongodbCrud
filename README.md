@@ -69,7 +69,7 @@ you will show the feedback result in the console and your database will be updat
 
 	deleteDatabase(<database name>) 
 
-	deleteDatabase("database")
+	deleteDatabase("db")
 
   ## Insert Single Data
   
