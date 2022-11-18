@@ -26,7 +26,7 @@ and set its value which is collected from the atlas connect
 	```
 - go to dbConnection.js file
 	
-	- edit this file  with below system
+	- edit this file  with below code
 	>code
 
 	```
@@ -35,7 +35,7 @@ and set its value which is collected from the atlas connect
 	--->for atlas
 	const  client  =  new  MongoClient(process.env.DATABASE_CLOUD);
 	```
-**You are all set now**
+**You are all set**
 now run this **command in terminal**
 >code
 
