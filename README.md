@@ -7,7 +7,7 @@
 
 
 
- - create a **.env** file in the root directory
+ - create a **.env** file in the root directory add below things
   - create a variable named,DATABASE_URL
 	 >Example:
 	```
