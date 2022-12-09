@@ -15,7 +15,21 @@ const updateWith = {
 const defaultReplacement = {
   note: `the filtered data is being modified by this random data`,
 };
+var allData=[]
+
 // 🔼🔼constants required for this file
+//-----------------
+// Create Database
+//-----------------
+
+const createDatabase=async (db,collection) => {
+ const database = client.db(db)
+ database.createCollection(collection)
+ console.log(chalk.greenBright.bold.underline(`database is creater with database name: ${db} and collection name: ${collection}`));
+ 
+}
+
+
 
 //------------------------
 // show all database data
@@ -29,8 +43,12 @@ const showAll = async (db, collection) => {
 
       console.log(element)
     });
+    // const data=await database.find({}).toArray();
+    // allData= await  [...data]
+    // console.log(allData);
   } catch (error) {
     console.log(error)
+    
   }
   finally {
     await client.close();
@@ -101,6 +119,7 @@ const findSingleData = async (db, collection, queryData = {}) => {
     const data = await database.findOne(queryData);
 
     console.log(chalk.blue.bold(`the searched data is: ${data}`));
+
   } catch (error) {
     console.log(chalk.red.bold(`${error}`));
 
@@ -123,6 +142,7 @@ async function findMultipleData(db, collection, query) {
     }
     console.log(chalk.greenBright.bold(`data: from the database ${dbName}`));
     await data.forEach(element => console.log(element));
+
   } finally {
     await client.close();
   }
@@ -167,7 +187,7 @@ const deleteMultipleData = async (db, collection, query) => {
 // Replace Document
 //-----------------
 
-async function replaceDoc(db,collection,query,replacedData=defaultReplacement) {
+async function replaceDoc(db, collection, query, replacedData = defaultReplacement) {
   try {
     const database = client.db(db);
     const movies = database.collection(collection);
@@ -217,17 +237,19 @@ async function updateMultipleDocs(db, collection, query, updateValue = updateWit
 
     const result = await database.updateMany(query, updateValue);
 
-      console.log(chalk.greenBright.bold(
-        `${result.matchedCount} data is modified`,)
-      );
-    
+    console.log(chalk.greenBright.bold(
+      `${result.matchedCount} data is modified`,)
+    );
+
   } finally {
     await client.close();
   }
 }
 
 
-
+// create database with collection name 
+// createDatabase()
+// createDatabase('multiple','data')
 
 // show data
 // showAll()
@@ -272,4 +294,4 @@ async function updateMultipleDocs(db, collection, query, updateValue = updateWit
 
 
 
-module.exports = { showAll, deleteDatabase, insertSingle, insertMultiple, findSingleData, findMultipleData, deleteSingleData, deleteMultipleData,updateSingleDoc,updateMultipleDocs,replaceDoc }
+module.exports = { createDatabase,showAll, deleteDatabase, insertSingle, insertMultiple, findSingleData, findMultipleData, deleteSingleData, deleteMultipleData, updateSingleDoc, updateMultipleDocs, replaceDoc }
